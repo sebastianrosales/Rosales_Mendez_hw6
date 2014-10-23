@@ -8,7 +8,7 @@
 #define C 30
 #define D 1
 
-int main(void){
+int main(int argc, char **argv){
     
     double h, tmin,tmax;
     double *x;
@@ -34,10 +34,12 @@ int main(void){
     x=malloc(n_points*sizeof(double));
     y=malloc(n_points*sizeof(double));
     
-
+/* valores de equilibrio son
     x[0]=C/D;
     y[0]=A/B;
-
+*/
+    x[0] = atoi(argv[1]);
+    y[0] = atoi(argv[2]);
     
     for(i=1;i<n_points;i++){
         
@@ -88,23 +90,29 @@ int main(void){
     
     int x0=x[0];
     int y0=y[0];
-    FILE* in;
+  
     char bufx[20];
     char bufy[20];
     char nm= x0 -'0';
     char nm2= y0-'0';
     sprintf(bufx, "%d", x0);
     sprintf(bufy, "%d", y0);
-    char n1[50], n2[50], n3[50];
-    strcpy(n1,  "poblaciones_");
+    char filename[50], n2[50], n3[50];
+    strcpy(filename,  "poblaciones_");
     strcpy(n2,"_");
     strcpy(n3, ".dat");
     
-    strcat(n1, bufx);
-    strcat(n1, n2);
-    strcat(n1, bufy);
-    strcat(n1, n3);
+    strcat(filename, bufx);
+    strcat(filename, n2);
+    strcat(filename, bufy);
+    strcat(filename, n3);
     
-    printf("%s \n",n1);
+    FILE* in;
+    in = fopen(filename,"w");
+    
+    for(i=0;i<n_points;i++){
+        
+        fprintf(in, "%f\t%f\t%f \n",t[i],x[i],y[i]);
+    }
 
 }
