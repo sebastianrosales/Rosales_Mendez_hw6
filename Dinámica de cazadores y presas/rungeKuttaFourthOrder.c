@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define A 20
 #define B 1
 #define C 30
@@ -32,7 +33,6 @@ int main(void){
     t=malloc(n_points*sizeof(double));
     x=malloc(n_points*sizeof(double));
     y=malloc(n_points*sizeof(double));
-    z=malloc(n_points*sizeof(double));
     
 
     x[0]=C/D;
@@ -82,24 +82,29 @@ int main(void){
         x[i] = x[i-1] + h * xfunc5;
         y[i] = y[i-1] + h * xfunc5;
     
-    }
-    
-    FILE *in;
-    char filename[100]="poblaciones_";
-    
-    
-    
-    in =fopen(filename,"w");
-    if(!in){
-        printf("problems opening the file %s\n", filename);
-        exit(1);
-        
-    }
-    for(i=1;i<n_points;i++){
-        
-    fprintf(in, "%f\t%f\t%f \n",t[i],x[i],y[i] );
-        
     
     }
+    
+    
+    int x0=x[0];
+    int y0=y[0];
+    FILE* in;
+    char bufx[20];
+    char bufy[20];
+    char nm= x0 -'0';
+    char nm2= y0-'0';
+    sprintf(bufx, "%d", x0);
+    sprintf(bufy, "%d", y0);
+    char n1[50], n2[50], n3[50];
+    strcpy(n1,  "poblaciones_");
+    strcpy(n2,"_");
+    strcpy(n3, ".dat");
+    
+    strcat(n1, bufx);
+    strcat(n1, n2);
+    strcat(n1, bufy);
+    strcat(n1, n3);
+    
+    printf("%s \n",n1);
 
 }
