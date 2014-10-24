@@ -26,7 +26,7 @@ int main(int argc, char **argv){
     
 
     
-    h=0.01;
+    h=0.001;
     tmin=0.0;
     tmax=1.0;
     n_points=(tmax-tmin)/h;
@@ -114,5 +114,8 @@ int main(int argc, char **argv){
         
         fprintf(in, "%f\t%f\t%f \n",t[i],x[i],y[i]);
     }
+    
+    printf("%d \n",n_points);
+
 
 }
