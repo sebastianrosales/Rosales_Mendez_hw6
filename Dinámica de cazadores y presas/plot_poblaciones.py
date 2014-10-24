@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-pimp=np.loadtxt("poblaciones_1_20.dat")
+pimp=np.loadtxt("poblaciones_28_20.dat")
 
 n_points = 1000
 x = pimp[:,0]
-y  =  pimp[:,1]
+y  =  pimp[:,2]
 
 fig = plt.figure(figsize=(9.5,9.0))
 ax = plt.axes()
@@ -20,6 +20,6 @@ plt.plot(x,y, color='red', label="$f(x)=y$")
 ax.legend()
 
 
-filename = 'poblaciones_1_20'
+filename = 'poblaciones_30_20'
 plt.savefig(filename + '.pdf',format = 'pdf', transparent=True)
 plt.close()

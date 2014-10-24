@@ -41,6 +41,29 @@ int main(int argc, char **argv){
     x[0] = atoi(argv[1]);
     y[0] = atoi(argv[2]);
     
+    int x0=x[0];
+    int y0=y[0];
+    
+    char bufx[20];
+    char bufy[20];
+    char nm= x0 -'0';
+    char nm2= y0-'0';
+    sprintf(bufx, "%d", x0);
+    sprintf(bufy, "%d", y0);
+    char filename[50], n2[50], n3[50];
+    strcpy(filename,  "poblaciones_");
+    strcpy(n2,"_");
+    strcpy(n3, ".dat");
+    
+    strcat(filename, bufx);
+    strcat(filename, n2);
+    strcat(filename, bufy);
+    strcat(filename, n3);
+    
+    FILE* in;
+    in = fopen(filename,"w");
+
+    
     for(i=1;i<n_points;i++){
         
         xfunc1=A*x[i-1]-B*x[i-1]*y[i-1];
@@ -81,39 +104,16 @@ int main(int argc, char **argv){
 
 
         t[i] = t[i-1] + h;
-        x[i] = x[i-1] + h * xfunc5;
-        y[i] = y[i-1] + h * xfunc5;
+        x[i] = x[i-1] + h*xfunc5;
+        y[i] = y[i-1] + h*yfunc5;
     
-    
+      //  printf("%f %f \n",h*xfunc5,h*yfunc5);
+    fprintf(in, "%f\t%f\t%f \n",t[i],x[i],y[i]);
     }
     
     
-    int x0=x[0];
-    int y0=y[0];
+    
   
-    char bufx[20];
-    char bufy[20];
-    char nm= x0 -'0';
-    char nm2= y0-'0';
-    sprintf(bufx, "%d", x0);
-    sprintf(bufy, "%d", y0);
-    char filename[50], n2[50], n3[50];
-    strcpy(filename,  "poblaciones_");
-    strcpy(n2,"_");
-    strcpy(n3, ".dat");
-    
-    strcat(filename, bufx);
-    strcat(filename, n2);
-    strcat(filename, bufy);
-    strcat(filename, n3);
-    
-    FILE* in;
-    in = fopen(filename,"w");
-    
-    for(i=0;i<n_points;i++){
-        
-        fprintf(in, "%f\t%f\t%f \n",t[i],x[i],y[i]);
-    }
     
     printf("%d \n",n_points);
 
