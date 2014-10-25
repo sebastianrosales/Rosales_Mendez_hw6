@@ -1,10 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
-pimp=np.loadtxt("poblaciones_28_20.dat")
+if len(sys.argv) != 2:
+    print "Este programa necesita un (1) argumento para funcionar"
+    sys.exit()
+
+
+filename=sys.argv[1]
+pimp=np.loadtxt(filename)
 
 n_points = 1000
-x = pimp[:,0]
+x = pimp[:,1]
 y  =  pimp[:,2]
 
 fig = plt.figure(figsize=(9.5,9.0))
