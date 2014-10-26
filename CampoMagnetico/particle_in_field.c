@@ -9,7 +9,28 @@
 #define conversion 0.000000000000160217
 #define PI 3.14159265
 #define e 0.000000000000000000160217
-
+#define k -0.018308
+double p2(x){
+return pow(x,2);
+}
+double f1(double x, double y, double z, double vx, double vy, double vz){
+double r,r2;
+r2=p2(x)+p2(y)+p2(z);
+r=pow(r2,0.5);
+return k/pow(r,5)*((r2-3*p2(z))*vy-3*y*z*vz);
+}
+double f2(double x, double y, double z, double vx, double vy, double vz){
+double r,r2;
+r2=p2(x)+p2(y)+p2(z);
+r=pow(r2,0.5);
+return k/pow(r,5)*(3*x*y*vz-(r2-3*p2(z))*vx);
+}
+double f3(double x, double y, double z, double vx, double vy, double vz){
+double r,r2;
+r2=p2(x)+p2(y)+p2(z);
+r=pow(r2,0.5);
+return k/pow(r,5)*(3*y*z*vx-3*x*y*vz);
+}
 int main(int argc, char **argv){
         double h, tmin,tmax;
         double *x,*y,*z;
@@ -24,7 +45,7 @@ int main(int argc, char **argv){
         h=0.001;
     	tmin=0.0;
     	tmax=100.0;
-        n_points=100;
+        n_points=(tmax-tmin)/h;
         t=malloc(n_points*sizeof(double));
         x=malloc(n_points*sizeof(double));
         y=malloc(n_points*sizeof(double));
@@ -64,12 +85,12 @@ int main(int argc, char **argv){
 
 //condiciones iniciales
     t[0]=0.0;
-    x[0]=Rt;
+    x[0]=2*Rt;
     y[0]=0.0;
     z[0]=0.0;
     xprime[0]=0;
     yprime[0]=v0*cos(alpha* PI / 180.0);
-    zprime[0]=v0*sin(alpha * PI / 180.0);
+    zprime[0]=v0*sin(alpha* PI / 180.0);
     
     fprintf(in, "%f\t%f\t%f\t%f \n",t[0],x[0],y[0],z[0]);
    
