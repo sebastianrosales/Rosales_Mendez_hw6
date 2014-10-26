@@ -1,0 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define A 20
+#define B 1
+#define C 30
+#define D 1
