@@ -27,6 +27,6 @@ plt.plot(x,y, color='red', label="$f(x)=y$")
 ax.legend()
 
 
-filename = 'poblaciones_30_20'
+filename = filename[:-4]
 plt.savefig(filename + '.pdf',format = 'pdf', transparent=True)
 plt.close()
