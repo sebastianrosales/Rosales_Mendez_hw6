@@ -130,6 +130,7 @@ int main(int argc, char **argv){
     }
     
 
+    
  //   printf("%f %f %f \n",E0,m,v0);
 
 }
