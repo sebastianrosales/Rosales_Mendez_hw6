@@ -11,7 +11,7 @@ if len(sys.argv) != 2:
 filename=sys.argv[1]
 pimp=np.loadtxt(filename)
 
-n_points = 1000
+n_points = 100
 x = pimp[:,1]
 y  =  pimp[:,2]
 z  =  pimp[:,3]
@@ -23,9 +23,11 @@ o=fig.gca(projection='3d')
 o.scatter(x,y,z)
 
 
-o.set_xlabel('x')
-o.set_ylabel('y')
-o.set_zlabel('z')
+
+o.set_xlabel("$x$",fontsize=25)
+o.set_ylabel("$y$",fontsize=25)
+o.set_zlabel("$z$",fontsize=25)
+o.set_title("$\mathrm{Trayectoria}$", fontsize=25)
 
 filename = filename[:-4]
 plt.savefig(filename + '.pdf',format = 'pdf', transparent=True)
