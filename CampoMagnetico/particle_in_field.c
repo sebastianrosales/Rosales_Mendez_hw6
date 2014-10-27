@@ -33,7 +33,8 @@ int main(int argc, char **argv){
     
     E0 = atoi(argv[1])*conversion;
     alpha = atoi(argv[2]);
-    v0=sqrt(1-(1/(1+(E0/(m*pow(c,2))))));
+    v0=sqrt(1-(1/(1+pow((E0/(m*pow(c,2))),2))));
+    
     
     x[0]=Rt;
     y[0]=0.0;
@@ -42,6 +43,25 @@ int main(int argc, char **argv){
     yprime[0]=v0*cos(alpha* PI / 180.0);
     zprime[0]=v0*sin(alpha * PI / 180.0);
     
-    printf("%f %f %f \n",E0,m,v0);
+    
+    char bufx[20];
+    char bufy[20];
+    char nm= argv[1];
+    char nm2= argv[2];
+    sprintf(bufx, "%d", x0);
+    sprintf(bufy, "%d", y0);
+    char filename[50], n2[50], n3[50];
+    strcpy(filename,  "trayectoria_");
+    strcpy(n2,"_");
+    strcpy(n3, ".dat");
+    
+    strcat(filename, bufx);
+    strcat(filename, n2);
+    strcat(filename, bufy);
+    strcat(filename, n3);
+    
+    FILE* in;
+    in = fopen(filename,"w");
+ //   printf("%f %f %f \n",E0,m,v0);
 
 }
