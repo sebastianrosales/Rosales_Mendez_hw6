@@ -8,6 +8,7 @@
 #define c 300000000
 #define conversion 0.000000000000160217
 #define PI 3.14159265
+#define e 0.000000000000000000160217
 
 int main(int argc, char **argv){
         double h, tmin,tmax;
@@ -16,7 +17,7 @@ int main(int argc, char **argv){
     	double *t;
     	double xfunc, yfunc, zfunc;
         double xfuncprime, yfuncprime, zfuncprime;
-        double E0 ,E0j,alpha,v0;
+        double E0 ,E0j,alpha,v0,k, gamma;
     	int j,i,n_points;
     
         h=0.001;
@@ -35,7 +36,9 @@ int main(int argc, char **argv){
     E0j = E0*conversion;
     alpha = atoi(argv[2]);
     v0=sqrt(1-(1/(1+pow((E0/(m*pow(c,2))),2))));
-    
+    gamma =1+(E0/(m*pow(c,2))
+            
+    k=-(e*B0*pow(Rt,3))/(m*gamma);
     
     x[0]=Rt;
     y[0]=0.0;
@@ -43,6 +46,18 @@ int main(int argc, char **argv){
     xprime[0]=0;
     yprime[0]=v0*cos(alpha* PI / 180.0);
     zprime[0]=v0*sin(alpha * PI / 180.0);
+   
+    
+    
+    
+    
+    /*
+    xfunc=;
+    yfunc=;
+    zfunc=;
+    xfuncprime=;
+    yfuncprime=;
+    zfuncprime=;*/
     
     
     char bufE[20];
@@ -63,6 +78,15 @@ int main(int argc, char **argv){
     
     FILE* in;
     in = fopen(filename,"w");
+    
+    for(i=1;i<n_points;i++){
+        
+        
+        
+        
+    }
+    
+
  //   printf("%f %f %f \n",E0,m,v0);
 
 }
