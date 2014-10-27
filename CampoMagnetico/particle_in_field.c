@@ -41,15 +41,6 @@ int main(int argc, char **argv){
     gamma =1+(E0/(m*pow(c,2)));
     k=-(e*B0*pow(Rt,3))/(m*gamma);
     
-//condiciones iniciales
-    t[0]=0.0;
-    x[0]=Rt;
-    y[0]=0.0;
-    z[0]=0.0;
-    xprime[0]=0;
-    yprime[0]=v0*cos(alpha* PI / 180.0);
-    zprime[0]=v0*sin(alpha * PI / 180.0);
-
 //abre archivo para escribir
     
     char bufE[20];
@@ -71,6 +62,16 @@ int main(int argc, char **argv){
     FILE* in;
     in = fopen(filename,"w");
 
+//condiciones iniciales
+    t[0]=0.0;
+    x[0]=Rt;
+    y[0]=0.0;
+    z[0]=0.0;
+    xprime[0]=0;
+    yprime[0]=v0*cos(alpha* PI / 180.0);
+    zprime[0]=v0*sin(alpha * PI / 180.0);
+    
+    fprintf(in, "%f\t%f\t%f\t%f \n",t[0],x[0],y[0],z[0]);
    
 //primer paso de euler
     
@@ -96,9 +97,11 @@ int main(int argc, char **argv){
     yprime[1]=yprime[0]+h*yfuncprime;
     zprime[1]=zprime[0]+h*zfuncprime;
     
+    fprintf(in, "%f\t%f\t%f\t%f \n",t[1],x[1],y[1],z[1]);
+    
     //leapfrog
     
-    for(i=1;i<n_points;i++){
+    for(i=1;i<(n_points-1);i++){
         
         r=pow(x[i-1],2)+pow(y[i-1],2)+pow(z[i-1],2);
         
@@ -123,7 +126,7 @@ int main(int argc, char **argv){
         zprime[i+1]=zprime[i-1]+2*h*zfuncprime;
         
         
-        
+         fprintf(in, "%f\t%f\t%f\t%f \n",t[i+1],x[i+1],y[i+1],z[i+1]);
     }
     
 
