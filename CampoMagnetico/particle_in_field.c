@@ -17,7 +17,8 @@ int main(int argc, char **argv){
     	double *t;
     	double xfunc, yfunc, zfunc;
         double xfuncprime, yfuncprime, zfuncprime;
-        double E0 ,E0j,alpha,v0,k, gamma;
+        double E0 ,E0j,alpha,v0, gamma;
+        double Bx,By,Bz,r,k;
     	int j,i,n_points;
     
         h=0.001;
@@ -36,10 +37,10 @@ int main(int argc, char **argv){
     E0j = E0*conversion;
     alpha = atoi(argv[2]);
     v0=sqrt(1-(1/(1+pow((E0/(m*pow(c,2))),2))));
-    gamma =1+(E0/(m*pow(c,2))
+    gamma =1+(E0/(m*pow(c,2)));
             
     k=-(e*B0*pow(Rt,3))/(m*gamma);
-    
+        
     x[0]=Rt;
     y[0]=0.0;
     z[0]=0.0;
@@ -47,17 +48,19 @@ int main(int argc, char **argv){
     yprime[0]=v0*cos(alpha* PI / 180.0);
     zprime[0]=v0*sin(alpha * PI / 180.0);
    
+    r=pow(x[0],2)+pow(y[0],2)+pow(z[0],2);
     
-    
-    
-    
-    /*
-    xfunc=;
-    yfunc=;
-    zfunc=;
-    xfuncprime=;
-    yfuncprime=;
-    zfuncprime=;*/
+    Bx=(3*y[0]*x[0])/pow(r,5);
+    By=(3*y[0]*z[0])/pow(r,5);
+    Bz=k*(2*pow(z[0],2)-pow(y[0],2)-pow(x[0],2))/pow(r,5);
+              
+
+    xfunc=Bz*yprime[0]-By*zprime[0];
+    yfunc=Bx*zprime[0]-Bz*xprime[0];
+    zfunc=By*xprime[0]-Bx*yprime[0];
+    xfuncprime=0;
+    yfuncprime=0;
+    zfuncprime=0;
     
     
     char bufE[20];
