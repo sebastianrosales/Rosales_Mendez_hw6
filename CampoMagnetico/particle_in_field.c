@@ -16,7 +16,7 @@ int main(int argc, char **argv){
     	double *t;
     	double xfunc, yfunc, zfunc;
         double xfuncprime, yfuncprime, zfuncprime;
-        double E0,alpha,v0;
+        double E0 ,E0j,alpha,v0;
     	int j,i,n_points;
     
         h=0.001;
@@ -31,7 +31,8 @@ int main(int argc, char **argv){
         yprime=malloc(n_points*sizeof(double));
         zprime=malloc(n_points*sizeof(double));
     
-    E0 = atoi(argv[1])*conversion;
+    E0 = atoi(argv[1]);
+    E0j = E0*conversion;
     alpha = atoi(argv[2]);
     v0=sqrt(1-(1/(1+pow((E0/(m*pow(c,2))),2))));
     
@@ -44,20 +45,20 @@ int main(int argc, char **argv){
     zprime[0]=v0*sin(alpha * PI / 180.0);
     
     
-    char bufx[20];
-    char bufy[20];
-    char nm= argv[1];
-    char nm2= argv[2];
-    sprintf(bufx, "%d", x0);
-    sprintf(bufy, "%d", y0);
+    char bufE[20];
+    char bufa[20];
+    char nm= E0-'0';
+    char nm2= alpha - '0';
+    sprintf(bufE, "%f", E0);
+    sprintf(bufa, "%f", alpha);
     char filename[50], n2[50], n3[50];
     strcpy(filename,  "trayectoria_");
     strcpy(n2,"_");
     strcpy(n3, ".dat");
     
-    strcat(filename, bufx);
+    strcat(filename, bufE);
     strcat(filename, n2);
-    strcat(filename, bufy);
+    strcat(filename, bufa);
     strcat(filename, n3);
     
     FILE* in;
