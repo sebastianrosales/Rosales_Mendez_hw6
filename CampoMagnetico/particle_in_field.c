@@ -32,36 +32,25 @@ int main(int argc, char **argv){
         xprime=malloc(n_points*sizeof(double));
         yprime=malloc(n_points*sizeof(double));
         zprime=malloc(n_points*sizeof(double));
-    
+   
+//constantes
     E0 = atoi(argv[1]);
     E0j = E0*conversion;
     alpha = atoi(argv[2]);
     v0=sqrt(1-(1/(1+pow((E0/(m*pow(c,2))),2))));
     gamma =1+(E0/(m*pow(c,2)));
-            
     k=-(e*B0*pow(Rt,3))/(m*gamma);
-        
+    
+//condiciones iniciales
+    t[0]=0.0;
     x[0]=Rt;
     y[0]=0.0;
     z[0]=0.0;
     xprime[0]=0;
     yprime[0]=v0*cos(alpha* PI / 180.0);
     zprime[0]=v0*sin(alpha * PI / 180.0);
-   
-    r=pow(x[0],2)+pow(y[0],2)+pow(z[0],2);
-    
-    Bx=(3*y[0]*x[0])/pow(r,5);
-    By=(3*y[0]*z[0])/pow(r,5);
-    Bz=k*(2*pow(z[0],2)-pow(y[0],2)-pow(x[0],2))/pow(r,5);
-              
 
-    xfunc=Bz*yprime[0]-By*zprime[0];
-    yfunc=Bx*zprime[0]-Bz*xprime[0];
-    zfunc=By*xprime[0]-Bx*yprime[0];
-    xfuncprime=0;
-    yfuncprime=0;
-    zfuncprime=0;
-    
+//abre archivo para escribir
     
     char bufE[20];
     char bufa[20];
@@ -81,9 +70,57 @@ int main(int argc, char **argv){
     
     FILE* in;
     in = fopen(filename,"w");
+
+   
+//primer paso de euler
+    
+    r=pow(x[0],2)+pow(y[0],2)+pow(z[0],2);
+    
+    Bx=(3*y[0]*x[0])/pow(r,5);
+    By=(3*y[0]*z[0])/pow(r,5);
+    Bz=k*(2*pow(z[0],2)-pow(y[0],2)-pow(x[0],2))/pow(r,5);
+              
+
+    xfunc=Bz*yprime[0]-By*zprime[0];
+    yfunc=Bx*zprime[0]-Bz*xprime[0];
+    zfunc=By*xprime[0]-Bx*yprime[0];
+    xfuncprime=xprime[0];
+    yfuncprime=yprime[0];
+    zfuncprime=zprime[0];
+    
+    t[1]=t[0]+h;
+    x[1]=x[0]+h*xfuncprime;
+    y[1]=y[0]+h*yfuncprime;
+    z[1]=z[0]+h*zfuncprime;
+    xprime[1]=xprime[0]+h*xfuncprime;
+    yprime[1]=yprime[0]+h*yfuncprime;
+    zprime[1]=zprime[0]+h*zfuncprime;
+    
+    //leapfrog
     
     for(i=1;i<n_points;i++){
         
+        r=pow(x[i-1],2)+pow(y[i-1],2)+pow(z[i-1],2);
+        
+        Bx=(3*y[i-1]*x[i-1])/pow(r,5);
+        By=(3*y[i-1]*z[i-1])/pow(r,5);
+        Bz=k*(2*pow(z[i-1],2)-pow(y[i-1],2)-pow(x[i-1],2))/pow(r,5);
+        
+        
+        xfunc=Bz*yprime[i-1]-By*zprime[i-1];
+        yfunc=Bx*zprime[i-1]-Bz*xprime[i-1];
+        zfunc=By*xprime[i-1]-Bx*yprime[i-1];
+        xfuncprime=xprime[i-1];
+        yfuncprime=yprime[i-1];
+        zfuncprime=zprime[i-1];
+        
+        t[i+1]=t[i-1]+2*h;
+        x[i+1]=x[i-1]+2*h*xfuncprime;
+        y[i+1]=y[i-1]+2*h*yfuncprime;
+        z[i+1]=z[i-1]+2*h*zfuncprime;
+        xprime[i+1]=xprime[i-1]+2*h*xfuncprime;
+        yprime[i+1]=yprime[i-1]+2*h*yfuncprime;
+        zprime[i+1]=zprime[i-1]+2*h*zfuncprime;
         
         
         
