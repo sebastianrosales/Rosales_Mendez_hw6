@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -97,10 +95,11 @@ int main(int argc, char **argv){
     
     for(i=1;i<n_points;i++){
         
+      //k es la aceleración
       kx1=func1(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1],v0);
       ky1=func2(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1],v0);
       kz1=func3(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1],v0);
-      
+      //kprime es la velocidad 
       kxprime1=funcprime1(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
       kyprime1=funcprime2(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
       kzprime1=funcprime3(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
@@ -203,7 +202,7 @@ int main(int argc, char **argv){
     }
     
     
-
+    return 0;
 
 }
 
