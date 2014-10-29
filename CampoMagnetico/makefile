@@ -1,13 +1,16 @@
 #Variable: Se definen acá y se usan con $(NOMBRE)
 enrg=1
-alpha=45
-all: particle_in_field.x particle_in_field.c trayectoria_$(enrg).000000_$(alpha).000000.dat trayectoria_$(enrg).000000_$(alpha).000000.pdf
+alpha=30
+all:  trayectoria_$(enrg)_$(alpha).pdf
 
 # $@ significa el archivo target
 # $^ significa todos los prerrequistos 
 particle_in_field.x:particle_in_field.c
+	echo "Creando archivo .x "
 	cc $^ -lm -o $@
-trayectoria_$(enrg).000000_$(alpha).000000.dat:particle_in_field.x
+trayectoria_$(enrg)_$(alpha).dat:particle_in_field.x
+	echo "Creando archivo .dat"
 	./$^ $(enrg) $(alpha)
-trayectoria_$(enrg).000000_$(alpha).000000.pdf:trayectoria_$(enrg).000000_$(alpha).000000.dat
+trayectoria_$(enrg)_$(alpha).pdf:trayectoria_$(enrg)_$(alpha).dat
+	echo "Creando archivo .pdf  "
 	python plot_trayectoria.py $^
