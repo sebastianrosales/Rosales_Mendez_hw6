@@ -18,13 +18,13 @@ int main(int argc, char **argv){
     	double xfunc, yfunc, zfunc;
         double xfuncprime, yfuncprime, zfuncprime;
         double E0 ,E0j,alpha,v0, gamma;
-        double Bx,By,Bz,r,k,r2;
+        double Bx,By,Bz,r,k,r2,v1;
     	int j,i,n_points;
     
-        h=1;
+        h=0.011;
     	tmin=0.0;
-    	tmax=100.0;
-        n_points=100;
+    	tmax=1000.0;
+        n_points=(tmax-tmin)/h;
         t=malloc(n_points*sizeof(double));
         x=malloc(n_points*sizeof(double));
         y=malloc(n_points*sizeof(double));
@@ -129,9 +129,11 @@ int main(int argc, char **argv){
         y[i+1]=y[i-1]+2*h*yfuncprime;
         z[i+1]=z[i-1]+2*h*zfuncprime;
         
+        v1=pow(xprime[i-1],2)+pow(yprime[i-1],2)+pow(zprime[i-1],2);
         
         
-         fprintf(in, "%f\t%f\t%f\t%f \n",t[i+1],x[i+1],y[i+1],z[i+1]);
+         fprintf(in, "%f\t%f\t%f\t%f\t \n",t[i+1],x[i+1],y[i+1],z[i+1],v1,xfunc,yfunc,zfunc,r2,k);
+        printf("%f\t%f\t%f\t%f\t%f\t%f \n",xfunc,yfunc,zfunc,r2,k);
     }
     
 
