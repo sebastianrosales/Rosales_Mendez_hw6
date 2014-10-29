@@ -114,6 +114,7 @@ int main(int argc, char **argv){
       kx1=func1(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
       ky1=func2(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
       kz1=func3(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
+      
       kxprime1=funcprime1(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
       kyprime1=funcprime2(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
       kzprime1=funcprime3(x[i-1],y[i-1],z[i-1],xprime[i-1],yprime[i-1],zprime[i-1]);
@@ -126,26 +127,19 @@ int main(int argc, char **argv){
         x1=x[i-1]+h*kxprime1/2.0;
         xprime1=xprime[i-1]+h*kx1/2.0;
         kxprime2=funcprime1(x1,y1,z1,xprime1,yprime1,zprime1);
+        kx2=func1(x1,y1,z1,xprime1,yprime1,zprime1);
         
         y1=y[i-1]+h*kyprime1/2.0;
         yprime1=yprime[i-1]+h*ky1/2.0;
         kyprime2=funcprime2(x1,y1,z1,xprime1,yprime1,zprime1);
+        ky2=func2(x1,y1,z1,xprime1,yprime1,zprime1);
         
         
         z1=z[i-1]+h*kzprime1/2.0;
         zprime1=zprime[i-1]+h*kz1/2.0;
         kzprime2=funcprime3(x1,y1,z1,xprime1,yprime1,zprime1);
-        
-        
-        
-        
-        kx2=func1(x1,y1,z1,xprime1,yprime1,zprime1);
-        ky2=func2(x1,y1,z1,xprime1,yprime1,zprime1);
         kz2=func3(x1,y1,z1,xprime1,yprime1,zprime1);
-        
-    
       
-        
 //segundo paso 
         
         
@@ -154,23 +148,18 @@ int main(int argc, char **argv){
         x2=x[i-1]+h*kxprime2/2.0;
         xprime2=xprime[i-1]+h*kx2/2.0;
         kxprime3=funcprime1(x2,y2,z2,xprime2,yprime2,zprime2);
+        kx3=func1(x2,y2,z2,xprime2,yprime2,zprime2);
         
         y2=y[i-1]+h*kyprime2/2.0;
         yprime2=yprime[i-1]+h*ky2/2.0;
         kyprime3=funcprime2(x2,y2,z2,xprime2,yprime2,zprime2);
+        ky3=func2(x2,y2,z2,xprime2,yprime2,zprime2);
         
         z2=z[i-1]+h*kzprime2/2.0;
         zprime2=zprime[i-1]+h*kz2/2.0;
         kzprime3=funcprime3(x2,y2,z2,xprime2,yprime2,zprime2);
-        
-       
-        
-        kx3=func1(x2,y2,z2,xprime2,yprime2,zprime2);
-        ky3=func2(x2,y2,z2,xprime2,yprime2,zprime2);
         kz3=func3(x1,y1,z1,xprime1,yprime1,zprime1);
-        
-        
-        
+
         
 //tercer paso
         
@@ -179,21 +168,17 @@ int main(int argc, char **argv){
         x3=x[i-1]+h*kxprime3/2.0;
         xprime3=xprime[i-1]+h*kx3/2.0;
         kxprime4=funcprime1(x3,y3,z3,xprime3,yprime3,zprime3);
+        kx4=func1(x3,y3,z3,xprime3,yprime3,zprime3);
         
         y3=y[i-1]+h*kyprime3/2.0;
         yprime3=yprime[i-1]+h*ky3/2.0;
         kyprime4=funcprime2(x3,y3,z3,xprime3,yprime3,zprime3);
+        ky4=func2(x3,y3,z3,xprime3,yprime3,zprime3);
         
         z3=z[i-1]+h*kzprime3/2.0;
         zprime3=zprime[i-1]+h*kz3/2.0;
         kzprime4=funcprime3(x3,y3,z3,xprime3,yprime3,zprime3);
-
-        
-        
-        kx4=func1(x3,y3,z3,xprime3,yprime3,zprime3);
-        ky4=func2(x3,y3,z3,xprime3,yprime3,zprime3);
         kz4=func3(x3,y3,z3,xprime3,yprime3,zprime3);
-        
         
 //cuarto paso
         
@@ -202,8 +187,8 @@ int main(int argc, char **argv){
         ky5=(1.0/6.0)*(ky1 + 2.0*ky2 + 2.0*ky3 + ky4);
         kz5=(1.0/6.0)*(kz1 + 2.0*kz2 + 2.0*kz3 + kz4);
         kxprime5=(1.0/6.0)*(kxprime1 + 2.0*kxprime2 + 2.0*kxprime3 + kxprime4);
-        kyprime5=(1.0/6.0)*(kxprime1 + 2.0*kyprime2 + 2.0*kyprime3 + kyprime4);
-        kzprime5=(1.0/6.0)*(kzprime1 + 2.0*kzprime2 + 2.0*kzprime3 + kyprime4);
+        kyprime5=(1.0/6.0)*(kyprime1 + 2.0*kyprime2 + 2.0*kyprime3 + kyprime4);
+        kzprime5=(1.0/6.0)*(kzprime1 + 2.0*kzprime2 + 2.0*kzprime3 + kzprime4);
 
 
         t[i]=t[i-1]+h;
